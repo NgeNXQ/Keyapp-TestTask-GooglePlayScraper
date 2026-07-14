@@ -106,6 +106,7 @@ internal sealed class GooglePlayClient : IGooglePlayClient {
                 _scraperOptions.BlueprintBatchexecutePaginatedPayload
             );
         }
+
         var payload = _cachedPaginatedPayloadTemplate
             .Replace("<rpc_id>", _scraperOptions.AppsLookupPaginatedRpcId)
             .Replace("<metadata>", JsonEncodedText.Encode(metadata).ToString());

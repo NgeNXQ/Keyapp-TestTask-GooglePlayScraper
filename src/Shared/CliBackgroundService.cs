@@ -25,7 +25,6 @@ internal sealed class CliBackgroundService : BackgroundService {
             await _cliController.WorkAsync(token);
         }
         catch (OperationCanceledException) {
-            Console.WriteLine("Cancelled");
         }
         catch (Exception ex) {
             Console.WriteLine(ex.Message);

@@ -21,27 +21,27 @@ internal sealed class GooglePlayPackagesScraperGateway : IGooglePlayPackagesScra
         ScrapingParams parameters,
         [EnumeratorCancellation] CancellationToken token
     ) {
-        var current = await _googlePlayClient.PostInitialPackagesAsync(
+        var responses = await _googlePlayClient.PostInitialPackagesAsync(
             parameters.Keyword,
             parameters.Country,
             parameters.Language,
             token
         );
 
-        foreach (var pkg in current.Packages)
+        foreach (var pkg in responses.Packages)
             yield return pkg;
 
-        while (!string.IsNullOrEmpty(current.PaginationMetadata)) {
+        while (!string.IsNullOrEmpty(responses.PaginationMetadata)) {
             token.ThrowIfCancellationRequested();
 
-            current = await _googlePlayClient.PostPaginatedPackagesAsync(
-                current.PaginationMetadata,
+            responses = await _googlePlayClient.PostPaginatedPackagesAsync(
+                responses.PaginationMetadata,
                 parameters.Country,
                 parameters.Language,
                 token
             );
 
-            foreach (var pkg in current.Packages)
+            foreach (var pkg in responses.Packages)
                 yield return pkg;
         }
     }
