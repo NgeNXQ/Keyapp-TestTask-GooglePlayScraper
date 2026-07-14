@@ -1,0 +1,15 @@
+{
+    "GooglePlay": {
+        "Scraper": {
+            "BuildLabel": "boq_playuiserver_20260708.00_p1",
+            "HttpTimeoutSeconds": 15,
+            "SpoofedUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:152.0) Gecko/20100101 Firefox/152.0",
+            "PlayStoreServiceUrl": "https://play.google.com/_/PlayStoreUi/data/",
+            "BatchexecuteEndpoint": "batchexecute",
+            "AppsLookupInitialRpcId": "lGYRle",
+            "AppsLookupPaginatedRpcId": "qnKhOb",
+            "BlueprintBatchexecuteInitialPayload": "batchexecute.initial-payload.json",
+            "BlueprintBatchexecutePaginatedPayload": "batchexecute.paginated-payload.json"
+        }
+    }
+}

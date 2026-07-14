@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "bin/": true,
+        "obj/": true,
+        ".vscode/": true,
+    },
+    "editor.rulers": [
+        100
+    ],
+    "cSpell.words": [
+        "Keyapp",
+        "Batchexecute",
+        "rpcids",
+    ],
+}
