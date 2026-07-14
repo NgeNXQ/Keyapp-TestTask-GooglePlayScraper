@@ -32,24 +32,24 @@ Package names are printed to stdout, one per line, in server order.
 
 ```
 Presentation
-  CliController          entry point logic, reads parsed CLI args, kicks off the scrape
-  ScraperRequest          CLI argument schema (keyword, country, language)
+  CliController                        # entry point logic, reads parsed CLI args, kicks off the scrape
+  ScraperRequest                       # CLI argument schema (keyword, country, language)
 
 Orchestration
-  GooglePlayPackagesAggregatorService   drives the scrape loop, prints results as they arrive
-  ScrapingParams                        holds keyword/country/language for a single run
+  GooglePlayPackagesAggregatorService  # drives the scrape loop, prints results as they arrive
+  ScrapingParams                       # holds keyword, country, language for a single run
 
 Infrastructure
-  GooglePlayClient           builds and sends the batchexecute request, loads body templates
-  GooglePlayPackagesScraperGateway   pages through results, calling the client until no token is left
-  GeneralRpcProtobufPayloadParser    strips anti-XSSI prefix and unwraps the response envelope
-  PaginatedRpcProtobufPayloadParser  finds the pagination token inside the response
-  RegexHelpers                       extracts package names from the raw payload
-  GooglePlayScraperOptions           config values (rpc ids, urls, timeouts)
-  PackagesScraperResponse            result of one request (packages + pagination token)
-  Exceptions                         GooglePlayTransportException, GooglePlayParsingException, GooglePlayBlueprintMissingException
+  GooglePlayClient                     # builds and sends the batchexecute request, loads body templates
+  GooglePlayPackagesScraperGateway     # pages through results, calling the client until no token is left
+  GeneralRpcProtobufPayloadParser      # strips anti-XSSI prefix and unwraps the response envelope
+  PaginatedRpcProtobufPayloadParser    # finds the pagination token inside the response
+  RegexHelpers                         # extracts package names from the raw payload
+  GooglePlayScraperOptions             # config values (rpc ids, urls, timeouts)
+  PackagesScraperResponse              # result of one request (packages and pagination token)
+  Exceptions                           # GooglePlayTransportException, GooglePlayParsingException, GooglePlayBlueprintMissingException
 
 Config
-  etc/blueprints    request body templates
-  etc/config        rpc ids, urls, timeouts
+  etc/blueprints                       # request body templates
+  etc/config                           # rpc ids, urls, timeouts
 ```
