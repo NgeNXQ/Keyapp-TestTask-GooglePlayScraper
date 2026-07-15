@@ -25,7 +25,6 @@ internal sealed class GooglePlayClient : IGooglePlayClient {
     private readonly IGeneralRpcProtobufPayloadParser _generalPayloadParser;
     private readonly IPaginatedRpcProtobufPayloadParser _paginatedPayloadParser;
 
-    private string _cachedInitialPayloadTemplate = null!;
     private string _cachedPaginatedPayloadTemplate = null!;
 
     public GooglePlayClient(
@@ -87,20 +86,18 @@ internal sealed class GooglePlayClient : IGooglePlayClient {
     }
 
     private async Task<string> _CreateInitialRequestBodyPayloadAsync(string keyword) {
-        if (_cachedInitialPayloadTemplate is null) {
-            _cachedInitialPayloadTemplate = await _LoadTemplatePayloadAsync(
-                _scraperOptions.BlueprintBatchexecuteInitialPayload
-            );
-        }
+        var initialPayloadTemplate = await _LoadTemplatePayloadAsync(
+            _scraperOptions.BlueprintBatchexecuteInitialPayload
+        );
 
-        var payload = _cachedInitialPayloadTemplate
+        var payload = initialPayloadTemplate
             .Replace("<rpc_id>", _scraperOptions.AppsLookupInitialRpcId)
             .Replace("<keyword>", JsonEncodedText.Encode(keyword).ToString());
 
         return payload;
     }
 
-    private async Task<string> _CreatePaginatedRequestPayloadAsync(string metadata) {
+    private async ValueTask<string> _CreatePaginatedRequestPayloadAsync(string metadata) {
         if (_cachedPaginatedPayloadTemplate is null) {
             _cachedPaginatedPayloadTemplate = await _LoadTemplatePayloadAsync(
                 _scraperOptions.BlueprintBatchexecutePaginatedPayload
